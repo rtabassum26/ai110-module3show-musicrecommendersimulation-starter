@@ -22,17 +22,19 @@ This is a content-based system. It compares song attributes with one user's pref
 
 A genre match earns 0.4 points. A mood match earns 0.3 points. Energy earns up to 0.3 points, with more points for being closer to the user's target. Higher energy is not automatically better.
 
+The classic mode uses those original weights. Three advanced modes also score popularity, release decade, duration, instrumentalness, and detailed mood tags. Genre-First, Mood-First, and Energy-Focused use different weights that each add up to 1. Popularity, decade, and duration reward closeness to the requested values. Instrumentalness measures preference for music without vocals, and detailed tags reward overlap.
+
 The system scores every song and sorts from highest to lowest. If scores tie, the smaller song ID comes first. It returns the top five songs in the CLI. Each result explains where its points came from. A score measures the match under these rules, not the chance that someone will enjoy the song.
 
-I added CSV loading, numerical conversion, weighted scoring, explanations, and ranking to the starter functions. The CLI uses the dictionary-based functions. The starter OOP recommendation methods are still placeholders.
+I added CSV loading, numerical conversion, weighted scoring, explanations, and ranking to the starter functions. The CLI uses the dictionary-based functions. The object interface now uses those same functions, so both interfaces share the scoring rules. A small Strategy pattern keeps the mode weights separate from matching and ranking.
 
 ---
 
 ## 4. Data Used
 
-The catalog contains 20 fictional songs. I kept the 10 starter songs and added 10 AI-generated examples. The added songs broaden the genres and moods. Their numerical values are illustrative, not measured from audio.
+The catalog contains 20 fictional songs. I kept the 10 starter songs and added 10 AI-generated examples. The added songs broaden the genres and moods. Their numerical values are illustrative, not measured from audio. The five added attributes were also assigned as examples. Popularity and release decades are not real streaming or release records.
 
-Each song has an ID, title, artist, genre, mood, energy, tempo, valence, danceability, and acousticness. The current score uses only genre, mood, and energy. IDs break ties, while titles and artists identify the results.
+Each song now has 15 fields. The original fields are ID, title, artist, genre, mood, energy, tempo, valence, danceability, and acousticness. Five new fields are popularity, release decade, duration in seconds, instrumentalness, and detailed mood tags. All advanced modes score the five new fields along with genre, mood, and energy. The classic mode still scores only genre, mood, and energy. IDs break ties, while titles and artists identify the results.
 
 The catalog includes pop, lofi, rock, jazz, ambient, synthwave, indie pop, folk, soul, country, rnb, metal, hip hop, reggae, techno, classical, and salsa. Lofi has three songs, pop has two, and each other genre has one. Moods include happy, chill, intense, sad, and relaxed.
 
@@ -50,11 +52,13 @@ The standard profiles produce sensible results based on the song attributes. Sun
 
 ## 6. Limitations and Bias
 
-The fixed genre bonus can favor familiar styles and limit discovery, creating a possible filter bubble. For sad, high-energy pop, two songs without the sad label ranked above the only sad song. Doubling the energy weight pushed that sad song out of the top five. Exact matching also treats related labels, such as chill and relaxed, as unrelated. When genre and mood are missing from the catalog, the system still returns five songs based only on energy, even if the matches are weak.
+The fixed genre bonus can favor familiar styles and limit discovery, creating a possible filter bubble. For sad, high-energy pop, two songs without the sad label ranked above the only sad song. Doubling the energy weight pushed that sad song out of the top five. Exact matching also treats related labels, such as chill and relaxed, as unrelated. In classic mode, missing genre and mood labels leave only energy to determine the top five, even if matches are weak. Advanced modes also use the extra targets, but they still return five songs without a minimum-match threshold. Popularity preferences may favor already popular tracks, and detailed tags can repeat information already represented by mood. Some users may need different weights or defaults.
 
 ---
 
 ## 7. Evaluation
+
+The following profile comparisons and weight experiment describe the original classic mode. A separate advanced-mode check appears below.
 
 I tested five profiles against the same 20-song catalog and checked each profile's top five songs, scores, and reasons. The comparisons below use the original weights: genre 0.4, mood 0.3, and energy 0.3. Full terminal outputs are recorded in `README.md`.
 
@@ -96,11 +100,25 @@ I also temporarily halved the genre weight to 0.2 and doubled the energy weight 
 The results follow the scoring recipe, but that does not prove real listening accuracy. These are fictional songs with illustrative attributes, and I evaluated their metadata rather than listening to audio or collecting listener ratings.
 
 
+### Advanced Challenge Evaluation
+
+I ran all five profiles through Genre-First, Mood-First, Energy-Focused, and Classic. For happy pop, Mood-First moved Rooftop Lights above Gym Hero. Genre-First kept Gym Hero second. The same profile and catalog were used, so the change came from the strategy weights.
+
+| Profile | Genre-First top 3 | Mood-First top 3 | Energy-Focused top 3 |
+|---|---|---|---|
+| High-Energy Pop | Sunrise City (0.960), Gym Hero (0.744), Rooftop Lights (0.652) | Sunrise City (0.928), Rooftop Lights (0.821), Gym Hero (0.522) | Sunrise City (0.955), Rooftop Lights (0.843), Gym Hero (0.761) |
+| Chill Lofi | Midnight Coding (0.984), Library Rain (0.926), Focus Flow (0.795) | Midnight Coding (0.988), Library Rain (0.880), Spacewalk Thoughts (0.678) | Midnight Coding (0.979), Library Rain (0.915), Focus Flow (0.845) |
+| Deep Intense Rock | Storm Runner (0.947), Gym Hero (0.574), No More Silence (0.439) | Storm Runner (0.917), Gym Hero (0.714), No More Silence (0.424) | Storm Runner (0.937), Gym Hero (0.773), No More Silence (0.687) |
+| Edge Case: Sad High-Energy Pop | Sunrise City (0.700), Gym Hero (0.700), After the Goodbye (0.589) | After the Goodbye (0.794), Gym Hero (0.464), Sunrise City (0.463) | Gym Hero (0.746), Sunrise City (0.734), Storm Runner (0.683) |
+| Edge Case: Unknown Labels and Zero Energy | Spacewalk Thoughts (0.435), Library Rain (0.384), Coffee Shop Stories (0.377) | Spacewalk Thoughts (0.460), Library Rain (0.367), Focus Flow (0.354) | Spacewalk Thoughts (0.615), Library Rain (0.547), Letters Unsent (0.547) |
+
+Eleven automated tests passed. They checked that each new attribute affects every advanced mode, all weights total 1, and explanations account for the scores. They also checked tag overlap, invalid inputs, tie-breaking, CLI execution, and consistency between object and dictionary interfaces. Classic mode reproduced all five earlier top-five lists. The original repository test file was not supplied. The user verified earlier baseline outputs; manual verification of these new modes on the user's computer is still pending.
+
 ---
 
 ## 8. Ideas for Improvement
 
-- Let users choose the weights and select more than one genre or mood. Give partial credit to related labels.
+- Extend the three scoring modes with user-adjustable weights and multiple preferred genres or moods. Give partial credit to related labels.
 - Expand and balance the catalog. Use real listener feedback to check whether suggestions are useful.
 - Add a discovery option for more variety. Warn users when no strong matches exist instead of always filling five slots.
 
@@ -115,3 +133,5 @@ AI helped me expand the dataset, implement the functions, and design profiles th
 I was surprised that matching just genre, mood, and energy could produce lists that felt personalized based on the labels. Different profiles had different leading songs, even without training a model. The reasons also made it easy to understand why the same song could suit several profiles.
 
 Next, I would let users adjust the weights and choose multiple genres or moods. I would also try a larger catalog and collect listener feedback. That would help me judge whether a change improves the recommendations instead of simply changing their order.
+
+The advanced challenges showed me how keeping the weights separate makes it easier to compare strategies. Adding more attributes also created more assumptions to check. I would test those assumptions with real listener feedback before calling one mode better.

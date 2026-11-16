@@ -1,21 +1,21 @@
-id,title,artist,genre,mood,energy,tempo_bpm,valence,danceability,acousticness
-1,Sunrise City,Neon Echo,pop,happy,0.82,118,0.84,0.79,0.18
-2,Midnight Coding,LoRoom,lofi,chill,0.42,78,0.56,0.62,0.71
-3,Storm Runner,Voltline,rock,intense,0.91,152,0.48,0.66,0.10
-4,Library Rain,Paper Lanterns,lofi,chill,0.35,72,0.60,0.58,0.86
-5,Gym Hero,Max Pulse,pop,intense,0.93,132,0.77,0.88,0.05
-6,Spacewalk Thoughts,Orbit Bloom,ambient,chill,0.28,60,0.65,0.41,0.92
-7,Coffee Shop Stories,Slow Stereo,jazz,relaxed,0.37,90,0.71,0.54,0.89
-8,Night Drive Loop,Neon Echo,synthwave,moody,0.75,110,0.49,0.73,0.22
-9,Focus Flow,LoRoom,lofi,focused,0.40,80,0.59,0.60,0.78
-10,Rooftop Lights,Indigo Parade,indie pop,happy,0.76,124,0.81,0.82,0.35
-11,Golden Porch,Willow Creek,folk,nostalgic,0.32,84,0.55,0.43,0.94
-12,After the Goodbye,Clara Vale,soul,sad,0.29,68,0.18,0.39,0.76
-13,Open Highway,Dusty Pines,country,hopeful,0.64,108,0.78,0.61,0.67
-14,Velvet Promises,Amara Blue,rnb,romantic,0.46,86,0.72,0.75,0.42
-15,No More Silence,Iron Harbor,metal,angry,0.97,174,0.21,0.34,0.02
-16,Cornerstone,Verse Atlas,hip hop,confident,0.81,96,0.74,0.89,0.08
-17,Island Afternoon,Coral Roots,reggae,carefree,0.55,82,0.90,0.83,0.38
-18,Glass Labyrinth,Lumen Circuit,techno,mysterious,0.87,130,0.33,0.92,0.01
-19,Letters Unsent,Elena Frost,classical,melancholic,0.24,58,0.22,0.16,0.98
-20,Daybreak Parade,Sol del Barrio,salsa,joyful,0.88,184,0.95,0.96,0.58
+id,title,artist,genre,mood,energy,tempo_bpm,valence,danceability,acousticness,popularity,release_decade,duration_seconds,instrumentalness,detailed_mood_tags
+1,Sunrise City,Neon Echo,pop,happy,0.82,118,0.84,0.79,0.18,88,2020,205,0.05,euphoric|bright|playful
+2,Midnight Coding,LoRoom,lofi,chill,0.42,78,0.56,0.62,0.71,42,2020,180,0.96,calm|focused|cozy
+3,Storm Runner,Voltline,rock,intense,0.91,152,0.48,0.66,0.10,73,2010,245,0.08,aggressive|driven|rebellious
+4,Library Rain,Paper Lanterns,lofi,chill,0.35,72,0.60,0.58,0.86,31,2010,195,0.98,calm|cozy|reflective
+5,Gym Hero,Max Pulse,pop,intense,0.93,132,0.77,0.88,0.05,92,2020,190,0.03,motivational|euphoric|driven
+6,Spacewalk Thoughts,Orbit Bloom,ambient,chill,0.28,60,0.65,0.41,0.92,25,2000,360,0.99,dreamy|spacious|calm
+7,Coffee Shop Stories,Slow Stereo,jazz,relaxed,0.37,90,0.71,0.54,0.89,44,1990,270,0.82,warm|cozy|reflective
+8,Night Drive Loop,Neon Echo,synthwave,moody,0.75,110,0.49,0.73,0.22,65,2010,240,0.88,nostalgic|dreamy|driven
+9,Focus Flow,LoRoom,lofi,focused,0.40,80,0.59,0.60,0.78,39,2020,210,0.97,focused|calm|steady
+10,Rooftop Lights,Indigo Parade,indie pop,happy,0.76,124,0.81,0.82,0.35,78,2020,215,0.07,bright|euphoric|romantic
+11,Golden Porch,Willow Creek,folk,nostalgic,0.32,84,0.55,0.43,0.94,36,1970,230,0.15,nostalgic|warm|reflective
+12,After the Goodbye,Clara Vale,soul,sad,0.29,68,0.18,0.39,0.76,58,1990,255,0.04,heartbroken|reflective|lonely
+13,Open Highway,Dusty Pines,country,hopeful,0.64,108,0.78,0.61,0.67,61,2000,225,0.05,hopeful|warm|driven
+14,Velvet Promises,Amara Blue,rnb,romantic,0.46,86,0.72,0.75,0.42,69,2010,235,0.02,romantic|warm|dreamy
+15,No More Silence,Iron Harbor,metal,angry,0.97,174,0.21,0.34,0.02,47,1990,285,0.06,aggressive|rebellious|dark
+16,Cornerstone,Verse Atlas,hip hop,confident,0.81,96,0.74,0.89,0.08,84,2020,200,0.01,confident|driven|bold
+17,Island Afternoon,Coral Roots,reggae,carefree,0.55,82,0.90,0.83,0.38,53,1980,250,0.1,carefree|warm|playful
+18,Glass Labyrinth,Lumen Circuit,techno,mysterious,0.87,130,0.33,0.92,0.01,56,2010,330,0.99,dark|hypnotic|driven
+19,Letters Unsent,Elena Frost,classical,melancholic,0.24,58,0.22,0.16,0.98,28,1960,390,1.0,melancholic|reflective|gentle
+20,Daybreak Parade,Sol del Barrio,salsa,joyful,0.88,184,0.95,0.96,0.58,72,2000,260,0.12,joyful|euphoric|festive
